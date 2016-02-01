@@ -1,0 +1,13 @@
+- @timelines.each do |timeline|
+	%h1
+		= timeline.title
+		.btn-group
+			%a.btn.btn-default.btn-sm{href: url("/timelines/#{timeline.id}")}
+				%i.fa.fa-arrow-circle-right{:style => "color:#428bca"}
+					View Timeline
+			- if is_owner?(timeline.id)
+				%a.btn.btn-primary.btn-sm{href: url("/timelines/#{timeline.id}/edit")}
+					%i.fa.fa-pencil{:style => "color:white"}
+						Edit Timeline
+	%h2= timeline.description
+	%p= "@#{timeline.user.twitter_nickname}" if is_admin?

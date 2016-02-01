@@ -1,0 +1,14 @@
+%form.form-horizontal{:role => "form", :action => @action, :method => "post"}
+  %input{:type => "hidden", :name => "_method", :value => @method}
+  .form-group
+    %label.col-sm-2.control-label{:for => "title"} Title:
+    .col-sm-10
+      %input#title.form-control{:type => "title", :name => "timeline[title]", :value => @timeline.title}
+  .form-group
+    %label.col-sm-2.control-label{:for => "description"} Description:
+    .col-sm-10
+      %textarea.form-control{:name => "timeline[description]", :rows => "4", :cols => "50"}
+        = @timeline.description
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      %button.btn.btn-success{:type => "submit"} Submit

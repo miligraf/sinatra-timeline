@@ -1,0 +1,60 @@
+!!!
+%html{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}/
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    %title Timeline(S)
+    %link{href: "/css/bootstrap.min.css", rel: "stylesheet"}/
+    %link{href: "/css/font-awesome.min.css", rel: "stylesheet"}/
+    %link{href: "/css/custom.css", rel: "stylesheet"}/
+    /[if lt IE 9]
+      %script{src: "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"}
+      %script{src: "https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"}
+  %body
+    .navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle Navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand Timeline(S)
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li
+              %a{:href => "/"} Home
+            / %li
+            /   %a{:href => "/about"} About
+            / %li
+            /   %a{:href => "/contact"} Contact
+          %ul.nav.navbar-nav.navbar-right
+            -if logged_in?
+              %li
+                %button.btn.btn-default.btn-sm.navbar-btn.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+                  %i{:class => "fa fa-user", :style => "color:#4099FF"}
+                    = "@#{current_user.twitter_nickname}"
+                  %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{href: url("/logout")}
+                      %i{:class => "fa fa-sign-out", :style => "color:black"}
+                      Logout
+                  %li
+                    %a{href: url("/me/timelines")}
+                      %i{:class => "fa fa-tasks", :style => "color:black"}
+                      My Timelines
+            - else
+              %li
+                %button.btn.btn-default.navbar-btn{:type => "button"}
+                  %a{href: url("/auth/twitter")}
+                    %i{:class => "fa fa-sign-in", :style => "color:black"}
+                    Login
+    .container
+      = yield
+    #footer
+      .container
+        %p.text-muted Timeline(S) by Milton Andrade
+    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"}
+    %script{src: "/js/bootstrap.min.js"}

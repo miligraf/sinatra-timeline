@@ -1,0 +1,25 @@
+%h1
+	= @timeline.title
+	- if is_owner?(@timeline.id)
+		.btn-group
+			%a.btn.btn-primary.btn-sm{href: url("/timelines/#{@timeline.id}/edit")}
+				%i.fa.fa-pencil{:style => "color:white"}
+					Edit Timeline
+			%a.btn.btn-success.btn-sm{href: url("/timelines/#{@timeline.id}/events/new")}
+				%i.fa.fa-plus-square{:style => "color:white"}
+					New Event
+%h2= @timeline.description
+- @timeline.events.each do |event|
+	.panel.panel-default
+		.panel-heading
+			= event.date.try(:strftime, '%b %e, %Y')
+			- if is_owner?(@timeline.id)
+				.pull-right
+					%a.btn.btn-primary.btn-sm{href: url("/timelines/#{@timeline.id}/events/#{event.id}/edit")}
+						%i.fa.fa-pencil{:style => "color:white"}
+							Edit Event
+				.clearfix
+		.panel-body= event.description
+		.panel-footer{:style => "#{event.share ? 'background-color:#d7ebf5' : ''}"}
+			%i{:class => "fa fa-twitter", :style => "color:#4099FF"}
+			= event.tweet
