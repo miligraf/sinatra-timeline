@@ -1,2 +1,4 @@
 # sinatra-timeline
-Jan 21, 2014
+
+## Description
+Login with your Twitter account, create a timeline of events and publish them automatically on the anniversary date.
