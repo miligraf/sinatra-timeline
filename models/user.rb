@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 	def self.todays_shares
 		User.includes(:events).where("EXTRACT(day FROM events.date)=EXTRACT(day FROM CURRENT_DATE) and EXTRACT(month FROM events.date)=EXTRACT(month FROM CURRENT_DATE) and events.share=true").references(:events).each do |user|
 			user.share_on_twitter(user.events)
+			user.share_on_facebook(user.events)
 		end
 	end
 
@@ -26,6 +27,11 @@ class User < ActiveRecord::Base
 		  config.access_token_secret = self.twitter_access_token_secret
 		end
 		events.each {|event| client.update(event.tweet)}
+	end
+
+	def share_on_facebook(events)
+		page_graph = Koala::Facebook::API.new(ENV['FB_PAGE_TOKEN'])
+		events.each {|event| page_graph.put_wall_post(event.tweet)}
 	end
 
 end
