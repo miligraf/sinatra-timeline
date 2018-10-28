@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'omniauth-twitter'
+require 'koala'
 require './config/environments'
 require 'haml'
 Dir["./models/*.rb"].each {|file| require file }
