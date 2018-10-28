@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.8', :patchlevel => '459'
+ruby '2.4.1'
 gem 'sinatra'
 gem 'omniauth-twitter'
 gem 'activerecord'
