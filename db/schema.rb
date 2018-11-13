@@ -10,36 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140425023608) do
+ActiveRecord::Schema.define(version: 2018_11_13_022515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "events", force: true do |t|
-    t.integer  "timeline_id", limit: 8
+  create_table "events", id: :serial, force: :cascade do |t|
+    t.bigint "timeline_id"
     t.datetime "date"
-    t.text     "description"
-    t.string   "tweet"
+    t.text "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "share",                 default: true
+    t.boolean "share", default: true
   end
 
-  create_table "timelines", force: true do |t|
-    t.integer  "user_id",     limit: 8
-    t.string   "title"
-    t.text     "description"
+  create_table "timelines", id: :serial, force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "title", limit: 255
+    t.text "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.integer  "twitter_uid",                 limit: 8
-    t.string   "twitter_nickname"
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.bigint "twitter_uid"
+    t.string "twitter_nickname", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "twitter_access_token"
-    t.text     "twitter_access_token_secret"
+    t.text "twitter_access_token"
+    t.text "twitter_access_token_secret"
   end
 
 end
