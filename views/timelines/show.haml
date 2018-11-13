@@ -4,10 +4,10 @@
 		.btn-group
 			%a.btn.btn-primary.btn-sm{href: url("/timelines/#{@timeline.id}/edit")}
 				%i.fa.fa-pencil{:style => "color:white"}
-					Edit Timeline
+				Edit Timeline
 			%a.btn.btn-success.btn-sm{href: url("/timelines/#{@timeline.id}/events/new")}
 				%i.fa.fa-plus-square{:style => "color:white"}
-					New Event
+				New Event
 %h2= @timeline.description
 - @timeline.events.each do |event|
 	.panel.panel-default
@@ -17,14 +17,14 @@
 				.pull-right
 					%a.btn.btn-primary.btn-sm{href: url("/timelines/#{@timeline.id}/events/#{event.id}/edit")}
 						%i.fa.fa-pencil{:style => "color:white"}
-							Edit Event
+						Edit Event
 				.clearfix
 		.panel-body= event.description
 		.panel-footer{:style => "#{event.share ? 'background-color:#d7ebf5' : ''}"}
 			- if event.share
-				Event will be shared in
+				Event will be shared on
 				%i{:class => "fa fa-twitter", :style => "color:#4099FF"}
 				and
-				%i{:class => "fa fa-facebook", :style => "color:#3B5998"}
+				%i{:class => "fa fa-facebook-square", :style => "color:#3B5998"}
 			- else
 				Event won't be shared.
