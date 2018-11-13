@@ -9,22 +9,30 @@
 				%i.fa.fa-plus-square{:style => "color:white"}
 				New Event
 %h2= @timeline.description
-- @timeline.events.each do |event|
-	.panel.panel-default
-		.panel-heading
-			= event.date.try(:strftime, '%b %e, %Y')
-			- if is_owner?(@timeline.id)
-				.pull-right
-					%a.btn.btn-primary.btn-sm{href: url("/timelines/#{@timeline.id}/events/#{event.id}/edit")}
-						%i.fa.fa-pencil{:style => "color:white"}
-						Edit Event
-				.clearfix
-		.panel-body= event.description
-		.panel-footer{:style => "#{event.share ? 'background-color:#d7ebf5' : ''}"}
-			- if event.share
-				Event will be shared on
-				%i{:class => "fa fa-twitter", :style => "color:#4099FF"}
-				and
-				%i{:class => "fa fa-facebook-square", :style => "color:#3B5998"}
-			- else
-				Event won't be shared.
+#accordion.panel-group
+	- @events_by_month.each do |month|
+		.panel.panel-default
+			.panel-heading
+				%h4.panel-title
+					%a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "##{month[0]}"}
+						= Date::MONTHNAMES[month[0]]
+			%div{:id => month[0], :class => "panel-collapse collapse"}
+				- month[1].each do |event|
+					.panel.panel-default{:style => "margin:15px"}
+						.panel-heading
+							= event.date.try(:strftime, '%b %e, %Y')
+							- if is_owner?(@timeline.id)
+								.pull-right
+									%a.btn.btn-primary.btn-sm{href: url("/timelines/#{@timeline.id}/events/#{event.id}/edit")}
+										%i.fa.fa-pencil{:style => "color:white"}
+										Edit Event
+								.clearfix
+						.panel-body= event.description
+						.panel-footer{:style => "#{event.share ? 'background-color:#d7ebf5' : ''}"}
+							- if event.share
+								Event will be shared on
+								%i{:class => "fa fa-twitter", :style => "color:#4099FF"}
+								and
+								%i{:class => "fa fa-facebook-square", :style => "color:#3B5998"}
+							- else
+								Event won't be shared.

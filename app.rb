@@ -83,6 +83,7 @@ end
 
 get '/timelines/:id' do
   @timeline = Timeline.find(params[:id])
+  @events_by_month = @timeline.events.group_by { |e| e.date.month }
   haml :"timelines/show"
 end
 
