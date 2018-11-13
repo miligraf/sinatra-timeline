@@ -26,12 +26,12 @@ class User < ActiveRecord::Base
 		  config.access_token        = self.twitter_access_token
 		  config.access_token_secret = self.twitter_access_token_secret
 		end
-		events.each {|event| client.update(event.tweet)}
+		events.each {|event| client.update(event.description)}
 	end
 
 	def share_on_facebook(events)
 		page_graph = Koala::Facebook::API.new(ENV['FB_PAGE_TOKEN'])
-		events.each {|event| page_graph.put_wall_post(event.tweet)}
+		events.each {|event| page_graph.put_wall_post(event.description)}
 	end
 
 end

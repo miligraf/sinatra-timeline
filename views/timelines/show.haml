@@ -21,5 +21,11 @@
 				.clearfix
 		.panel-body= event.description
 		.panel-footer{:style => "#{event.share ? 'background-color:#d7ebf5' : ''}"}
-			%i{:class => "fa fa-twitter", :style => "color:#4099FF"}
-			= event.tweet
+			- if event.share
+				Event will be shared in
+				%i{:class => "fa fa-twitter", :style => "color:#4099FF"}
+				and
+				%i{:class => "fa fa-facebook", :style => "color:#3B5998"}
+				.
+			- else
+				Event won't be shared.

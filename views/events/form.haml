@@ -10,12 +10,7 @@
       %textarea.form-control{:name => "event[description]", :rows => "4", :cols => "50"}
         = @event.description
   .form-group
-    %label.col-sm-2.control-label{:for => "tweet"} Tweet text:
-    .col-sm-10
-      %textarea.form-control{:name => "event[tweet]", :rows => "4", :cols => "50"}
-        = @event.tweet
-  .form-group
-    %label.col-sm-2.control-label{:for => "tweet"} Share:
+    %label.col-sm-2.control-label{:for => "share"} Share:
     .col-sm-10
       .checkbox
         - if @event.share
