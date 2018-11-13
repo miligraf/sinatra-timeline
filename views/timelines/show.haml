@@ -16,6 +16,7 @@
 				%h4.panel-title
 					%a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "##{month[0]}"}
 						= Date::MONTHNAMES[month[0]]
+						= "(#{month[1].size} events)"
 			%div{:id => month[0], :class => "panel-collapse collapse"}
 				- month[1].each do |event|
 					.panel.panel-default{:style => "margin:15px"}
