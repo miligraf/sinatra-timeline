@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 	def self.todays_shares
 		User.includes(:events).where("EXTRACT(day FROM events.date)=EXTRACT(day FROM CURRENT_DATE) and EXTRACT(month FROM events.date)=EXTRACT(month FROM CURRENT_DATE) and events.share=true").references(:events).each do |user|
 			user.share_on_twitter(user.events)
-			# user.share_on_facebook(user.events)
+			user.share_on_facebook(user.events)
 		end
 	end
 
